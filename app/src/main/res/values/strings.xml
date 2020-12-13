@@ -2,4 +2,5 @@
     <string name="app_name">Camera</string>
     <string name="takePhoto">Tomar Foto</string>
     <string name="SavePhoto">Guardar Foto</string>
+    <string name="Negativo">Negativo</string>
 </resources>
