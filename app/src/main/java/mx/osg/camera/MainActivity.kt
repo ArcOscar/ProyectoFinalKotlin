@@ -1,5 +1,6 @@
 package mx.osg.camera
 
+import `in`.goodiebag.carouselpicker.CarouselPicker
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -44,6 +45,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // All filters available on the app
+        val textItems = ArrayList<CarouselPicker.PickerItem>()
+        textItems.add(CarouselPicker.TextItem("Negativo",9))
+        textItems.add(CarouselPicker.TextItem("Escala de Grises",9))
+        textItems.add(CarouselPicker.TextItem("Brillo",9))
+        textItems.add(CarouselPicker.TextItem("Contraste",9))
+        textItems.add(CarouselPicker.TextItem("Gamma",9))
+        textItems.add(CarouselPicker.TextItem("Separación RGB",9))
+        textItems.add(CarouselPicker.TextItem("Smooth",9))
+        textItems.add(CarouselPicker.TextItem("Gaussian Blur",9))
+        textItems.add(CarouselPicker.TextItem("Sharpen",9))
+        textItems.add(CarouselPicker.TextItem("Mean Removal",9))
+        textItems.add(CarouselPicker.TextItem("Embossing",9))
+        textItems.add(CarouselPicker.TextItem("Edge Detection",9))
+        textItems.add(CarouselPicker.TextItem("Zoom",9))
+        
+        val textAdapter = CarouselPicker.CarouselViewAdapter(this, textItems, 0)
+        carouselPicker.adapter = textAdapter
+
         // Clicking the button for the camera
         btnTakePicture.setOnClickListener {
             takingPhoto()
@@ -82,11 +102,13 @@ class MainActivity : AppCompatActivity() {
             imageView.setImageBitmap(imageTaken)
 
             btnSavePicture.visibility = View.VISIBLE
-            btnNegative.visibility = View.VISIBLE
 
-            btnNegative.setOnClickListener {
-                try { imageView.setImageBitmap(negative(imageTaken)) }
-                catch (e: Exception) {}
+            btnAplicar.setOnClickListener {
+                if (carouselPicker.currentItem == 0)
+                {
+                    try { imageView.setImageBitmap(negative(imageTaken)) }
+                    catch (e: Exception) {}
+                }
             }
 
             btnSavePicture.setOnClickListener {
@@ -101,6 +123,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // Function needed to place the bitmap in the same way as the photo was taken
     fun RotateBitmap(source: Bitmap): Bitmap {
         val matrix = Matrix()
         matrix.postRotate(90F)
