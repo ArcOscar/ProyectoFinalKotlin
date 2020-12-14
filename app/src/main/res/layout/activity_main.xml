@@ -55,6 +55,8 @@
         android:layout_gravity="center"
         android:src="@mipmap/not_found" />
 
+
+
     <in.goodiebag.carouselpicker.CarouselPicker
         android:id="@+id/carouselPicker"
         android:layout_marginBottom="60dp"
